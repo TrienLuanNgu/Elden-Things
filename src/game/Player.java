@@ -15,9 +15,12 @@ import edu.monash.fit2099.engine.displays.Menu;
  *
  */
 public class Player extends Actor {
-    public final int mana;
-    public final int strength;
+    public int mana;
+    public int strength;
+    public int hitPoints;
     private WeaponItem weaponItem;
+    public int healedHitPoints = 0;
+    public int healedMana = 0;
 
 
     /**
@@ -30,6 +33,7 @@ public class Player extends Actor {
     public Player(String name, char displayChar, int hitPoints, int mana, int strength) {
         super(name, displayChar, hitPoints);
         this.mana = mana;
+        this.hitPoints = hitPoints;
         this.strength = strength;
         this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.setIntrinsicWeapon(new BareFist());
@@ -47,7 +51,45 @@ public class Player extends Actor {
         return menu.showMenu(this, display);
     }
 
+    public int getMana() {
+        return mana;
+    }
 
+    public int getHitPoints() {
+        return hitPoints;
+    }
 
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
+    public void setHitPoints(int hitPoints) {
+        this.hitPoints = hitPoints;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public void addMana(int amount) {
+        this.mana += amount;
+    }
+
+    public void addStrength(int amount) {
+        this.strength += amount;
+    }
+
+    public void addHitpoints(int amount) {
+        this.hitPoints += amount;
+    }
+
+    @Override
+    public String toString(){
+        return name + " (Mana: " + mana + ", Strength: " + strength + ", Hit points: " + hitPoints + ")";
+    }
 
 }
