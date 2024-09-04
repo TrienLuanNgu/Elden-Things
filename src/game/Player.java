@@ -15,6 +15,11 @@ import edu.monash.fit2099.engine.displays.Menu;
  *
  */
 public class Player extends Actor {
+    public final int mana;
+    public final int strength;
+    private WeaponItem weaponItem;
+
+
     /**
      * Constructor.
      *
@@ -22,10 +27,13 @@ public class Player extends Actor {
      * @param displayChar Character to represent the player in the UI
      * @param hitPoints   Player's starting number of hitpoints
      */
-    public Player(String name, char displayChar, int hitPoints) {
+    public Player(String name, char displayChar, int hitPoints, int mana, int strength) {
         super(name, displayChar, hitPoints);
+        this.mana = mana;
+        this.strength = strength;
         this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.setIntrinsicWeapon(new BareFist());
+
     }
 
     @Override
@@ -38,4 +46,8 @@ public class Player extends Actor {
         Menu menu = new Menu(actions);
         return menu.showMenu(this, display);
     }
+
+
+
+
 }

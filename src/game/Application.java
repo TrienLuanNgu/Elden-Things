@@ -3,7 +3,9 @@ package game;
 import java.util.Arrays;
 import java.util.List;
 
+import edu.monash.fit2099.demo.mars.items.Stick;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
@@ -49,7 +51,11 @@ public class Application {
             }
         }
 
-        Player player = new Player("Tarnished", '@', 150);
+        Player player = new Player("Tarnished", '@', 150, 100, 5);
+        ShortSword shortSword = new ShortSword();
+        gameMap.at(8, 4).addItem(shortSword);
+        GreatKnife greatKnife = new GreatKnife();
+        gameMap.at(6, 4).addItem(greatKnife);
         world.addPlayer(player, gameMap.at(7, 4));
 
         gameMap.at(42, 4).addActor(new FurnaceGolem());

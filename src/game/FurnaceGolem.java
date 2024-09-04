@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.Weapon;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,10 +19,12 @@ import java.util.Map;
  */
 public class FurnaceGolem extends Actor {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
+    private WeaponItem weaponItem;
 
     public FurnaceGolem() {
         super("Furnace Golem", 'A', 1000);
         this.behaviours.put(999, new WanderBehaviour());
+
     }
 
     @Override
@@ -39,6 +42,9 @@ public class FurnaceGolem extends Actor {
         ActionList actions = new ActionList();
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new AttackAction(this, direction));
+//            actions.add(new AttackAction(this, direction, weaponItem));
+            actions.add(new AttackAction(this, direction, new GreatKnife()));
+            actions.add(new AttackAction(this, direction, new ShortSword()));
         }
         return actions;
     }
