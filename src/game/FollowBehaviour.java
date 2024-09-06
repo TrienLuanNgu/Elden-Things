@@ -1,6 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
@@ -25,6 +26,7 @@ public class FollowBehaviour implements Behaviour {
 
         Location here = map.locationOf(actor);
         Location there = map.locationOf(target);
+        ActionList actions = new ActionList();
 
         int currentDistance = distance(here, there);
         if (currentDistance == range){

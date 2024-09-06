@@ -24,9 +24,12 @@ public class FurnaceGolem extends Actor{
 
 
 
+
     public FurnaceGolem() {
         super("Furnace Golem", 'A', 1000);
         //this.behaviours.add(new WanderBehaviour());
+        this.addCapability(Status.HOSTILE_TO_ENEMY);
+
 
 
     }
