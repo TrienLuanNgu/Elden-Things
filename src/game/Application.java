@@ -3,9 +3,8 @@ package game;
 import java.util.Arrays;
 import java.util.List;
 
-import edu.monash.fit2099.demo.mars.items.Stick;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
@@ -73,8 +72,15 @@ public class Application {
         world.addPlayer(player, gameMap.at(7, 4));
 
 
+        FurnaceGolem furnaceGolem = new FurnaceGolem();
 
-        gameMap.at(42, 4).addActor(new FurnaceGolem());
+        furnaceGolem.behaviours.add(new FollowBehaviour(player,2));
+
+        furnaceGolem.behaviours.add(new WanderBehaviour());
+
+        gameMap.at(42, 4).addActor(furnaceGolem);
+
+
 
         world.run();
 

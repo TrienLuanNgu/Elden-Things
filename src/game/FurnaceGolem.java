@@ -6,35 +6,41 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.weapons.Weapon;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Class representing the Furnace Golem
  * For now, it can only wander around the map.
  * @author Adrian Kristanto
  */
-public class FurnaceGolem extends Actor {
-    private Map<Integer, Behaviour> behaviours = new HashMap<>();
+public class FurnaceGolem extends Actor{
+    public List<Behaviour> behaviours = new ArrayList<Behaviour>();
+    //Map<Integer, Behaviour> behaviours = new HashMap<>();
     private WeaponItem weaponItem;
+    private final Random rand = new Random();
+
+
 
     public FurnaceGolem() {
         super("Furnace Golem", 'A', 1000);
-        this.behaviours.put(999, new WanderBehaviour());
+        //this.behaviours.add(new WanderBehaviour());
+
 
     }
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        for (Behaviour behaviour : behaviours.values()) {
+        for (Behaviour behaviour : behaviours) {
             Action action = behaviour.getAction(this, map);
             if(action != null)
                 return action;
         }
-        return new DoNothingAction();
+
+        //return new DoNothingAction();
+        return actions.get(rand.nextInt(actions.size()));
     }
 
     @Override
@@ -43,9 +49,14 @@ public class FurnaceGolem extends Actor {
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new AttackAction(this, direction));
 //            actions.add(new AttackAction(this, direction, weaponItem));
+        }
+        if (otherActor.getItemInventory().contains(new GreatKnife())) {
             actions.add(new AttackAction(this, direction, new GreatKnife()));
+        }
+        if (otherActor.getItemInventory().contains(new ShortSword())) {
             actions.add(new AttackAction(this, direction, new ShortSword()));
         }
         return actions;
     }
+
 }

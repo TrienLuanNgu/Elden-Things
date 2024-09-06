@@ -32,6 +32,7 @@ public class Bug extends Actor {
     }
 
     @Override
+
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList list = super.allowableActions(otherActor, direction, map);
         list.add(new KickAction(this));

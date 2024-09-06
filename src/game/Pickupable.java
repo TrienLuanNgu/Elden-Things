@@ -1,7 +1,11 @@
 package game;
 
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.items.PickUpAction;
 
-public interface Pickupable {
-    void pickup(Item item);
+abstract class Pickupable extends PickUpAction {
+    public Pickupable(Item item) {
+        super(item);
+    }
+
 }

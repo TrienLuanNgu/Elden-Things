@@ -51,6 +51,18 @@ public class Player extends Actor {
         return menu.showMenu(this, display);
     }
 
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = new ActionList();
+        if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+            actions.add(new AttackAction(this,direction));
+
+        }
+
+        return actions;
+
+    }
+
     public int getMana() {
         return mana;
     }

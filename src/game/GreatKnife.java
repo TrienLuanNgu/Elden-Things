@@ -14,4 +14,5 @@ public class GreatKnife extends WeaponItem{
         return super.attack(attacker, target, map);
     }
 
+
 }
