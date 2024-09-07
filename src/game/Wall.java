@@ -14,6 +14,7 @@ public class Wall extends Ground {
 
     public Wall() {
         super('#', "Wall");
+        this.addCapability(Status.BURNABLE);
     }
 
     @Override

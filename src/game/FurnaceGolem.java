@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 
@@ -31,7 +32,6 @@ public class FurnaceGolem extends Actor{
         this.addCapability(Status.HOSTILE_TO_ENEMY);
 
 
-
     }
 
     @Override
@@ -49,16 +49,28 @@ public class FurnaceGolem extends Actor{
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
+        boolean hasGreatKnife = false;
+        boolean hasShortSword = false;
+
+        for (Item item : otherActor.getItemInventory()) {
+            if (item.hasCapability(Status.HAS_GREAT_KNIFE)) {
+                hasGreatKnife = true;
+            } else if (item.hasCapability(Status.HAS_GREAT_KNIFE)) {
+                hasShortSword = true;
+            }
+        }
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new AttackAction(this, direction));
-//            actions.add(new AttackAction(this, direction, weaponItem));
         }
-        if (otherActor.getItemInventory().contains(new GreatKnife())) {
+//            actions.add(new AttackAction(this, direction, weaponItem));
+        if (hasGreatKnife) {
             actions.add(new AttackAction(this, direction, new GreatKnife()));
         }
-        if (otherActor.getItemInventory().contains(new ShortSword())) {
+        if (hasShortSword) {
             actions.add(new AttackAction(this, direction, new ShortSword()));
         }
+
+
         return actions;
     }
 

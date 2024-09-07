@@ -51,6 +51,7 @@
 package game;
 
 import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.NumberRange;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -73,17 +74,47 @@ public class StompBehaviour extends Action implements Behaviour {
     public String execute(Actor actor, GameMap map) {
         //return actor + " stomps " + target + "." + System.lineSeparator();
         Random rand = new Random();
-        if (!(rand.nextInt(100) < 5 )) {
-            return actor + " misses " + target + ".";
-        }
-        target.deductHitpoints(100);
-        if (target.getHitPoints() <= 0) {
-            //map.removeActor(target);
-            //return actor + " killed " + target + ".";
-            return target.unconscious(actor,map);
-        }
-        return actor + " stomps " + target + "." + System.lineSeparator();
+        if ((rand.nextInt(100) < 5 )) {
 
+            if ((rand.nextInt(100) < 10 )) {
+                for (Exit exit : map.locationOf(actor).getExits()) {
+                    if (!exit.getDestination().containsAnActor()) {
+                        exit.getDestination().setGround(new Fire());
+                    }
+                }
+                target.deductHitpoints(50);
+                if (target.getHitPoints() <= 0) {
+                    System.out.println(actor + " stomps and exploded." + System.lineSeparator());
+                    return target.unconscious(actor,map);
+                }
+            }
+            target.deductHitpoints(100);
+            if (target.getHitPoints() <= 0) {
+                System.out.println(actor + " stomps " + target + System.lineSeparator());
+                return target.unconscious(actor,map);
+            }
+            return actor + " stomps " + target + "." + System.lineSeparator();
+        }
+
+        else if ((rand.nextInt(100) < 10 )) {
+            for (Exit exit : map.locationOf(actor).getExits()) {
+                if (!exit.getDestination().containsAnActor()) {
+                    if((exit.getDestination().getGround().hasCapability(Status.BURNABLE))) {
+                        exit.getDestination().setGround(new Fire());
+
+                    }
+                }
+            }
+            target.deductHitpoints(50);
+            if (target.getHitPoints() <= 0) {
+                System.out.println(actor + " exploded." + System.lineSeparator());
+                return target.unconscious(actor,map);
+            }
+            return actor + " exploded." + System.lineSeparator();
+
+        }
+
+        return actor + " misses " + target + ".";
 
 
 

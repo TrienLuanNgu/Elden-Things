@@ -10,18 +10,21 @@ import edu.monash.fit2099.engine.positions.Ground;
  * Modified by:
  *
  */
-public class Floor extends Ground {
+public class Floor extends Ground{
     public Floor() {
         super('_', "Floor");
+        this.addCapability(Status.BURNABLE);
     }
 
     @Override
     public boolean canActorEnter(Actor actor) {
-        if (actor instanceof FurnaceGolem) {
+        if (!(actor.hasCapability(Status.BURN))) {
             return false;
         }
         return super.canActorEnter(actor);
     }
+
+
 }
 
 

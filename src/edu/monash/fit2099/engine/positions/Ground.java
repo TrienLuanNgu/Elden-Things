@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.GameEntity;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.displays.Printable;
+import game.Status;
 
 /**
  * Class representing terrain type
@@ -21,6 +22,7 @@ public abstract class Ground extends GameEntity implements Printable {
     public Ground(char displayChar, String name) {
         this.displayChar = displayChar;
         this.name = name;
+
     }
 
     @Override

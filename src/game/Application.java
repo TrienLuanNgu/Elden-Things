@@ -69,6 +69,21 @@ public class Application {
         ShadowtreeFragment shadowtreeFragment = new ShadowtreeFragment();
         gameMap.at(8, 8).addItem(shadowtreeFragment);
 
+        ShadowtreeFragment shadowtreeFragment1 = new ShadowtreeFragment();
+        gameMap.at(10, 8).addItem(shadowtreeFragment1);
+
+        ShadowtreeFragment shadowtreeFragment2 = new ShadowtreeFragment();
+        gameMap.at(12, 2).addItem(shadowtreeFragment2);
+
+        ShadowtreeFragment shadowtreeFragment3 = new ShadowtreeFragment();
+        gameMap.at(15, 9).addItem(shadowtreeFragment3);
+
+        ShadowtreeFragment shadowtreeFragment4 = new ShadowtreeFragment();
+        gameMap.at(15, 8).addItem(shadowtreeFragment4);
+
+        ShadowtreeFragment shadowtreeFragment5 = new ShadowtreeFragment();
+        gameMap.at(14, 8).addItem(shadowtreeFragment5);
+
         world.addPlayer(player, gameMap.at(7, 4));
 
 
@@ -76,10 +91,8 @@ public class Application {
 
 
         gameMap.at(42, 4).addActor(furnaceGolem);
-
-
-        furnaceGolem.behaviours.add(new StompBehaviour(player, 2));
         furnaceGolem.behaviours.add(new FollowBehaviour(player, 2));
+        furnaceGolem.behaviours.add(new StompBehaviour(player, 2));
         furnaceGolem.behaviours.add(new WanderBehaviour());
 
 

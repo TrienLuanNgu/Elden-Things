@@ -12,4 +12,6 @@ public enum Status {
     HAS_GREAT_KNIFE,
     HAS_SHORT_SWORD,
     NO_WEAPON,
+    BURN,
+    BURNABLE,
 }

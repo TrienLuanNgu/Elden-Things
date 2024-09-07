@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.positions.Ground;
 
 /**
  * Class representing the Player.
@@ -21,6 +22,7 @@ public class Player extends Actor {
     private WeaponItem weaponItem;
     public int healedHitPoints = 0;
     public int healedMana = 0;
+    private Ground ground;
 
 
     /**
@@ -36,6 +38,7 @@ public class Player extends Actor {
         this.hitPoints = hitPoints;
         this.strength = strength;
         this.addCapability(Status.HOSTILE_TO_ENEMY);
+        this.addCapability(Status.BURN);
         this.setIntrinsicWeapon(new BareFist());
 
     }
@@ -51,16 +54,6 @@ public class Player extends Actor {
         return menu.showMenu(this, display);
     }
 
-//    @Override
-//    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-//        ActionList actions = new ActionList();
-//        if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-//            actions.add(new AttackAction(this, direction));
-//
-//        }
-//        return actions;
-//
-//    }
 
     public int getMana() {
         return mana;

@@ -13,5 +13,7 @@ public class Dirt extends Ground {
 
     public Dirt() {
         super('.', "Dirt");
+        this.addCapability(Status.BURNABLE);
     }
+
 }
