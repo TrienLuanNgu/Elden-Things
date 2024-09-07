@@ -73,15 +73,19 @@ public class Application {
 
 
         FurnaceGolem furnaceGolem = new FurnaceGolem();
-        furnaceGolem.behaviours.add(new StompBehaviour(player, 2));
-        furnaceGolem.behaviours.add(new FollowBehaviour(player, 2));
-        furnaceGolem.behaviours.add(new WanderBehaviour());
+
 
         gameMap.at(42, 4).addActor(furnaceGolem);
 
 
+        furnaceGolem.behaviours.add(new StompBehaviour(player, 2));
+        furnaceGolem.behaviours.add(new FollowBehaviour(player, 2));
+        furnaceGolem.behaviours.add(new WanderBehaviour());
+
+
 
         world.run();
+
 
     }
 }

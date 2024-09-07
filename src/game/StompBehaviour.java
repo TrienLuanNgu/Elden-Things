@@ -73,15 +73,21 @@ public class StompBehaviour extends Action implements Behaviour {
     public String execute(Actor actor, GameMap map) {
         //return actor + " stomps " + target + "." + System.lineSeparator();
         Random rand = new Random();
-        if (!(rand.nextInt(100) < 5)) {
+        if (!(rand.nextInt(100) < 5 )) {
             return actor + " misses " + target + ".";
         }
-
         target.deductHitpoints(100);
-
-
+        if (target.getHitPoints() <= 0) {
+            //map.removeActor(target);
+            //return actor + " killed " + target + ".";
+            return target.unconscious(actor,map);
+        }
         return actor + " stomps " + target + "." + System.lineSeparator();
 
+
+
+
+//        return actor + " stomps " + target + "." + System.lineSeparator();
     }
 
     @Override
