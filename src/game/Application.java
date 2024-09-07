@@ -3,17 +3,30 @@ package game;
 import java.util.Arrays;
 import java.util.List;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actors.FurnaceGolem;
+import game.actors.Player;
+import game.behaviours.FollowBehaviour;
+import game.behaviours.StompBehaviour;
+import game.behaviours.WanderBehaviour;
+import game.flasks.FlaskOfHealing;
+import game.flasks.FlaskOfRejuvenation;
+import game.grounds.Dirt;
+import game.grounds.Floor;
+import game.grounds.Puddle;
+import game.grounds.Wall;
+import game.things.ShadowtreeFragment;
+import game.weapons.GreatKnife;
+import game.weapons.ShortSword;
 
 /**
  * The main class to start the game.
  * Created by:
  * @author Adrian Kristanto
- * Modified by:
+ * Modified by: Ngu Trien Luan
  *
  */
 public class Application {
@@ -50,19 +63,18 @@ public class Application {
             }
         }
 
-
-
         Player player = new Player("Tarnished", '@', 150, 100, 5);
+        world.addPlayer(player, gameMap.at(7, 4));
 
-//        new Display().println("Health: " + player.getHitPoints() + "/" + 150);
-//        new Display().println("Mana: " + player.getMana() + "/" + 100);
-//        new Display().println("Strength: " + player.getStrength() + "/" + 5);
         ShortSword shortSword = new ShortSword();
         gameMap.at(8, 4).addItem(shortSword);
+
         GreatKnife greatKnife = new GreatKnife();
         gameMap.at(6, 4).addItem(greatKnife);
+
         FlaskOfHealing flaskOfHealing = new FlaskOfHealing();
         gameMap.at(6, 5).addItem(flaskOfHealing);
+
         FlaskOfRejuvenation flaskOfRejuvenation = new FlaskOfRejuvenation();
         gameMap.at(8, 5).addItem(flaskOfRejuvenation);
 
@@ -84,21 +96,14 @@ public class Application {
         ShadowtreeFragment shadowtreeFragment5 = new ShadowtreeFragment();
         gameMap.at(14, 8).addItem(shadowtreeFragment5);
 
-        world.addPlayer(player, gameMap.at(7, 4));
-
-
         FurnaceGolem furnaceGolem = new FurnaceGolem();
-
-
         gameMap.at(42, 4).addActor(furnaceGolem);
+
         furnaceGolem.behaviours.add(new FollowBehaviour(player, 2));
         furnaceGolem.behaviours.add(new StompBehaviour(player, 2));
         furnaceGolem.behaviours.add(new WanderBehaviour());
 
-
-
         world.run();
-
 
     }
 }
